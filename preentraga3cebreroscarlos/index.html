@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="./stile.css">
+</head>
+
+<body>
+   
+    <form action="" class="app" id="app">
+    <div class="fila numero-caracteres">
+        <div class="col">
+            <label for="numero-caracteres">Número de caracteres</label>
+        </div>
+        <div class="col">
+            <div>
+                <button class="btn" id="btn-menos-uno">
+                    <img src="./iconos/menos-pequeno (1).png" alt="Menos">
+                </button>
+            </div>
+            <div>
+                <input type="text" id="numero-caracteres" readonly value="12">
+            </div>
+            <div>
+                <button class="btn" id="btn-mas-uno">
+                    <img src="./iconos/mas.png" alt="Más">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fila simbolos">
+        <div class="col">
+            <label for="simbolos">¿Incluir símbolos?</label>
+        </div>
+        <div class="col">
+            <button id="toggleButton" class="btn">Sí</button>
+        </div>
+    </div>
+
+    <div class="fila numeros">
+        <div class="col">
+            <label for="numeros">¿Incluir números?</label>
+        </div>
+        <div class="col">
+            
+                <button id="toggleButton2" class="btn">Sí</button>
+            
+        </div>
+    </div>
+
+    <div class="fila mayusculas">
+        <div class="col">
+            <label for="mayusculas">¿Incluir mayúsculas?</label>
+        </div>
+        <div class="col">
+            <button id="toggleButton3" class="btn">Sí</button>
+        </div>
+    </div>
+
+    <div class="fila generar">
+        <div class="col">
+            <button class="btn btn-generar" id="btn-generar">
+                Generar <img src="./iconos/cerrar.png" alt="Generar">
+            </button>
+        </div>
+        <div class="col">
+            <input type="text" class="input-contraseña" id="input-contraseña" readonly value="tita31902">
+        </div>
+    </div>
+
+    <div class="fila alerta">
+        <div class="col">
+            <div class="alerta-copiado" id="alerta-copiado">
+                <p>Texto copiado <img src="./iconos/copiar-alt.png" alt="Copiar"></p>
+            </div>
+        </div>
+    </div>
+</form>
+
+    <script src="contraseñas.js"></script>
+    
+
+</body>
+
+</html>

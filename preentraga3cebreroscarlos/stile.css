@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0f0c29;
+    background: linear-gradient(to left, #24243e, #302b63, #0f0c29);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.app {
+    background-color: #24243e;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px; /* Ancho del contenedor */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.fila {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Espaciado entre filas */
+}
+
+.col {
+    flex: 1; /* Asegura que las columnas se distribuyan equitativamente */
+    text-align: center; /* Centra el contenido */
+}
+
+label {
+    font-size: 18px; /* Tamaño de fuente del label */
+}
+
+.btn {
+    background-color: #6f6eff; /* Color de fondo del botón */
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn img {
+    width: 20px; /* Tamaño de las imágenes dentro de los botones */
+    height: 20px;
+}
+
+.btn:hover {
+    background-color: #4a4eff; /* Color del botón al pasar el mouse */
+}
+
+.input-contraseña {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f2f2f2; /* Color de fondo del campo de contraseña */
+    color: #333; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente del input */
+}
+
+.alerta-copiado {
+    display: none; /* Inicialmente oculto */
+    background-color: #28a745; /* Color de fondo de la alerta */
+    color: white; /* Color del texto de la alerta */
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.alerta-copiado p {
+    margin: 0;
+}
+
+/* Mostrar la alerta cuando sea necesario */
+.alerta-copiado.show {
+    display: block;
+}
+
