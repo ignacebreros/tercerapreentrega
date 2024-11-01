@@ -2,8 +2,13 @@
     let app = document.getElementById('app');
     let inputCaracteres = document.getElementById('numero-caracteres');
 
+    if (!app || !inputCaracteres) {
+        console.error('Error: Elementos necesarios no encontrados en el DOM.');
+        return;
+    }
+
     let configuracion = {
-        caracteres: parseInt(inputCaracteres.value),
+        caracteres: parseInt(inputCaracteres.value) || 8,
         simbolos: true,
         numeros: true,
         mayusculas: true,
@@ -11,58 +16,46 @@
     };
 
     let caracteres = { 
-        numeros: '0 1 2 3 4 5 6 7 8 9',
-        simbolos: '! # $ % & *',
-        mayusculas: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
-        minusculas: 'a b c d e f g h i j k l m n o p q r s t u v w x y z'
+        numeros: '0123456789',
+        simbolos: '!#$%&*',
+        mayusculas: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        minusculas: 'abcdefghijklmnopqrstuvwxyz'
     };
-    
 
-    
     app.addEventListener('submit', function(e) {
         e.preventDefault();
     });
 
-    
-    app.elements.namedItem('btn-mas-uno').addEventListener('click', function() {
+    app.elements.namedItem('btn-mas-uno')?.addEventListener('click', function() {
         configuracion.caracteres++;
         inputCaracteres.value = configuracion.caracteres;
-        console.log(configuracion.caracteres);
     });
 
-    app.elements.namedItem('btn-menos-uno').addEventListener('click', function() {
+    app.elements.namedItem('btn-menos-uno')?.addEventListener('click', function() {
         if (configuracion.caracteres > 1) {
             configuracion.caracteres--;
             inputCaracteres.value = configuracion.caracteres;
         }
     });
 
-   
-    const toggleButton = document.getElementById('toggleButton');
-    toggleButton.addEventListener('click', function() {
-        this.innerText = this.innerText === 'Sí' ? 'No' : 'Sí';
-        this.classList.toggle('active');
-        configuracion.simbolos = !configuracion.simbolos;
+    const toggleButtons = [
+        { id: 'toggleButton', key: 'simbolos' },
+        { id: 'toggleButton2', key: 'numeros' },
+        { id: 'toggleButton3', key: 'mayusculas' }
+    ];
+
+    toggleButtons.forEach(button => {
+        const toggleButton = document.getElementById(button.id);
+        if (toggleButton) {
+            toggleButton.addEventListener('click', function() {
+                this.innerText = this.innerText === 'Sí' ? 'No' : 'Sí';
+                this.classList.toggle('active');
+                configuracion[button.key] = !configuracion[button.key];
+            });
+        }
     });
 
-    
-    const toggleButton2 = document.getElementById('toggleButton2');
-    toggleButton2.addEventListener('click', function() {
-        this.innerText = this.innerText === 'Sí' ? 'No' : 'Sí';
-        this.classList.toggle('active');
-        configuracion.numeros = !configuracion.numeros;
-    });
-
-    
-    const toggleButton3 = document.getElementById('toggleButton3');
-    toggleButton3.addEventListener('click', function() {
-        this.innerText = this.innerText === 'Sí' ? 'No' : 'Sí';
-        this.classList.toggle('active');
-        configuracion.mayusculas = !configuracion.mayusculas;
-    });
-
-    
-    app.elements.namedItem('btn-generar').addEventListener('click', function() {
+    app.elements.namedItem('btn-generar')?.addEventListener('click', function() {
         generarPassword();
     });
 
@@ -70,23 +63,38 @@
         let caracteresFinales = '';
         let password = '';
 
-        
         for (let propiedad in configuracion) {
             if (configuracion[propiedad] === true && propiedad !== 'caracteres') {
-                caracteresFinales += caracteres[propiedad] + ' ';
+                caracteresFinales += caracteres[propiedad];
             }
         }
 
-        
-        let arrayCaracteres = caracteresFinales.trim().split(' ');
+        if (caracteresFinales.length === 0) {
+            console.warn('Configuración inválida: se debe seleccionar al menos un tipo de carácter.');
+            return;
+        }
 
-        
         for (let i = 0; i < configuracion.caracteres; i++) {
-            password += arrayCaracteres[Math.floor(Math.random() * arrayCaracteres.length)];
+            password += caracteresFinales[Math.floor(Math.random() * caracteresFinales.length)];
         }
 
         console.log('Contraseña generada:', password);
-        app.elements.namedItem('input-contraseña').value = password;
+
+        
+        if (typeof Swal !== 'undefined') {
+            setTimeout(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Contraseña generada con éxito",
+                    text: `Tu nueva contraseña es: ${password}`,
+                    showConfirmButton: true,
+                    confirmButtonText: "Aceptar"
+                });
+            }, 1000); 
+        } else {
+            console.warn("SweetAlert no está disponible.");
+        }
     }
-    
-})();
+            
+})()
